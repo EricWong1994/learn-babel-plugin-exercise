@@ -1,0 +1,59 @@
+version1.js
+```js
+traverse(ast, {
+  CallExpression (path, state) {
+    if (types.isMemberExpression(path.node.callee)
+      && path.node.callee.object.name === 'console'
+      && ['log', 'info', 'error', 'debug'].includes(path.node.callee.property.name)) {
+      const { line, column } = path.node.loc.start;
+      path.node.arguments.unshift(types.stringLiteral(`filename:(${line},${column})`))
+    }
+  }
+})
+```
+正确输出
+```js
+console.log("filename:(2,4)", 1);
+function func() {
+  console.info("filename:(5,8)", 2);
+}
+export default class Clazz {
+  say() {
+    console.debug("filename:(10,12)", 3);
+  }
+  render() {
+    return <div>{console.error("filename:(13,25)", 4)}</div>;
+  }
+}
+```
+
+
+
+```js
+const targetCalleeName = ['log', 'info', 'error', 'debug'].map(item => `console.${item}`);
+
+traverse(ast, {
+  CallExpression (path, state) {
+    const calleeName = generate(path.node.callee).code;
+    console.log('calleeName: ', calleeName);
+
+    if (targetCalleeName.includes(calleeName)) {
+      const { line, column } = path.node.loc.start;
+      path.node.arguments.unshift(types.stringLiteral(`filename:(${line},${column})`))
+    }
+  }
+})
+```
+
+ TODO为啥打印出了下面这4行？
+
+```js
+calleeName:  console.log
+
+calleeName:  console.info
+
+calleeName:  console.debug
+
+calleeName:  console.error
+```
+
