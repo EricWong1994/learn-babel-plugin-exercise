@@ -45,7 +45,6 @@ traverse(ast, {
 })
 ```
 
- TODO为啥打印出了下面这4行？
 
 ```js
 calleeName:  console.log
@@ -56,4 +55,3 @@ calleeName:  console.debug
 
 calleeName:  console.error
 ```
-
