@@ -2,7 +2,7 @@
 	"configurations": [
 		{
 			"name": "插入函数调用参数-version1",
-			"program": "${workspaceFolder}/exersize-parameters-insert/src/version1.js",
+			"program": "${workspaceFolder}/exercise-parameters-insert/src/version1.js",
 			"request": "launch",
 			"type": "node"
 		},
