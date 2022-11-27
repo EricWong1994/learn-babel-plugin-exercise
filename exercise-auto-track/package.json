@@ -1,10 +1,8 @@
 {
-  "scripts": {
-    "run-test": "jest . /src/plugin/tests/parameters-insert-plugin.test.js"
-  },
   "dependencies": {
     "@babel/core": "^7.13.14",
     "@babel/generator": "^7.13.9",
+    "@babel/helper-module-imports": "^7.13.12",
     "@babel/parser": "^7.13.13",
     "@babel/template": "^7.12.13",
     "@babel/traverse": "^7.13.13",
